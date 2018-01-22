@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>To conscience</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-01-17T14:39:40.699Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>toconscience</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开篇</title>
+    <link href="http://yoursite.com/2018/01/17/my-first-post/"/>
+    <id>http://yoursite.com/2018/01/17/my-first-post/</id>
+    <published>2018-01-17T13:27:10.000Z</published>
+    <updated>2018-01-17T14:39:40.699Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是我的第一篇发布在独立站点的博客。网站名字 “To conscience” 是《至良知》的意思，相信很多人都知道我说的是王阳明。对比年少时只会把歌名作为QQ空间或者博客名，这个名字就有逼格多了，哈哈！</p><p>之所以要搭建自己的博客，是因为：公共的博客平台不乏优秀的产品，但总归有太多限制。文章水平太低怕影响自己声誉，与技术无关的又不敢放上去。有自己的博客，则不用管那么多，只需照顾自己的喜欢。</p><p>而博客又不同于日记。它能起到分享的目的；自然也失去记录隐私的功能。对于技术型的笔记，博客最好，因为一篇好的研究结论，只有自己知道太可惜，必须拿出来给大家看，才能实现其最大的价值。教是最好的学，能够用通顺的语言和合理的逻辑讲述技术，才算学到家。</p><p>对于非技术类的文章，我认为仍有分享的必要。社会哲理类的知识和思考，传播总是有好处的；人生感悟之类，也没准能找到共鸣。</p><p>写博客于我个人而言，则有以下一些好处。</p><ul><li>磨练文笔。不难察觉本篇文章的生涩。而想写好文章，必然要多写。</li><li>排解忧愁烦闷。我是一个焦虑的人，把我的焦虑讲出来，对内心是一种安慰。</li><li>提高影响力。如我将在之后的文章中频繁提到的<a href="http://tengj.top" target="_blank" rel="noopener">嘟嘟博客</a>，建立一年多，已经非常成功。</li></ul><p>这个博客站点的搭建过程也是完全依照嘟嘟的<a href="http://tengj.top/categories/hexo%E5%B9%B2%E8%B4%A7%E7%B3%BB%E5%88%97/" target="_blank" rel="noopener">教程</a>，也许后面我会写些文章来总结有差异的地方。</p><p>希望您阅读愉快！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是我的第一篇发布在独立站点的博客。网站名字 “To conscience” 是《至良知》的意思，相信很多人都知道我说的是王阳明。对比年少时只会把歌名作为QQ空间或者博客名，这个名字就有逼格多了，哈哈！&lt;/p&gt;
+&lt;p&gt;之所以要搭建自己的博客，是因为：公共的博客平台不乏优秀的
+      
+    
+    </summary>
+    
+      <category term="杂文" scheme="http://yoursite.com/categories/%E6%9D%82%E6%96%87/"/>
+    
+    
+      <category term="建站" scheme="http://yoursite.com/tags/%E5%BB%BA%E7%AB%99/"/>
+    
+  </entry>
+  
+</feed>
