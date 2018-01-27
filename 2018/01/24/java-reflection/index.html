@@ -49,7 +49,7 @@
 				<h1 class="site-name"><a href="/" title="To conscience">To conscience</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -87,16 +87,16 @@
 		<a href="/about" title="toconscience" target="_blank" itemprop="author">toconscience</a>
 		
   <p class="article-time">
-    <time datetime="2018-01-24T07:27:10.000Z" itemprop="datePublished"> 发表于 2018-01-24</time>
+    <time datetime="2018-01-24T07:27:10.000Z" itemprop="datePublished"> Published 2018-01-24</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.4.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.4.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -151,10 +151,24 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Method sqrt = Math.class.getMethod(&quot;sqrt&quot;, double.class);</span><br><span class="line">double y = (Double) f.invoke(null, 100);</span><br></pre></td></tr></table></figure>
 <p>上面的代码使用反射的方式调用<code>Math</code>类的开根号函数。关于<code>Method.invoke()</code>函数的签名有两点需要注意：</p>
 <ol>
-<li>第一个参数用于调用的对象，当方法是static是传null。</li>
+<li>第一个参数用于调用的对象，当方法是static时传null。</li>
 <li>方法的返回是一个<code>Object</code>对象，这里要显式转换成<code>Double</code>类型，然后再隐式转换成<code>double</code>基本类型。</li>
 </ol>
+<p>可见有了反射简直可以为所欲为，就是这么任性！</p>
 <h3 id="Java对函数式编程的支持"><a href="#Java对函数式编程的支持" class="headerlink" title="Java对函数式编程的支持"></a>Java对函数式编程的支持</h3><p>这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。</p>
+<p>以下三篇知乎的回答对闭包的相关知识总结的非常好：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/24084277/answer/110176733" target="_blank" rel="noopener">闭包（计算机科学）是什么?</a></li>
+<li><a href="https://www.zhihu.com/question/21395848/answer/110829597" target="_blank" rel="noopener">java为什么匿名内部类的参数引用时final?</a></li>
+<li><a href="https://www.zhihu.com/question/27416568/answer/36565794" target="_blank" rel="noopener">JVM的规范中允许编程语言语义中创建闭包(closure)吗?</a></li>
+</ul>
+<p>重点：Java对闭包只有值捕获（捕获就是指保存自由变量的动作），即值拷贝。因此就要求捕获的值不能被改变，因为改变了也无法同步。这就是为何匿名函数的自由变量在外层要被加上final修饰符了。</p>
+<p>而C#等语言则实现了引用拷贝，在匿名函数中的自由变量和外层的变量实际上是同一引用，因而在执行时是可以改变的。具体看看<a href="https://blogs.msdn.microsoft.com/ericlippert/2009/06/18/use-your-legs-not-your-back/" target="_blank" rel="noopener">这篇文章</a>就懂了。以下引用上面回答中的一段话，言简意赅，一针见血。</p>
+<blockquote>
+<p>Java编译器实现的只是capture-by-value，并没有实现capture-by-reference。而只有后者才能保持匿名内部类和外部环境局部变量保持同步。但<strong>Java又不肯明说</strong>，只能粗暴地一刀切，就说既然内外不能同步，那就不许大家改外围的局部变量。</p>
+</blockquote>
+<p>正是太多的不好意思说，不愿明说，浪费了多少人的时间！</p>
 <h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><h4 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h4>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -212,22 +226,22 @@
 
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.4.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.4.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分类</p>
+	<p class="asidetitle">Categories</p>
 		<ul>
 		
 		  
@@ -244,7 +258,7 @@
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			
@@ -261,14 +275,14 @@
 
   
   <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">归档</a></p>
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li></ul>
   </div>
 
 
   
   <div class="tagcloudlist">
-    <p class="asidetitle">标签云</p>
+    <p class="asidetitle">Tag Cloud</p>
     <div class="tagcloudlist clearfix">
        <a href="/tags/Java反射/" style="font-size: 10px;">Java反射</a> <a href="/tags/建站/" style="font-size: 10px;">建站</a>
     </div>
@@ -276,7 +290,7 @@
 
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
@@ -519,7 +533,7 @@ $(document).ready(function(){
 <!-- Totop Begin -->
 
 	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
 	</div>
 	<script src="/js/totop.js"></script>
 
