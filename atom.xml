@@ -62,7 +62,9 @@
       <category term="Java基础" scheme="http://yoursite.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="lambda表达式, 闭包" scheme="http://yoursite.com/tags/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E9%97%AD%E5%8C%85/"/>
+      <category term="lambda表达式" scheme="http://yoursite.com/tags/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="闭包" scheme="http://yoursite.com/tags/%E9%97%AD%E5%8C%85/"/>
     
   </entry>
   
