@@ -12,7 +12,7 @@
 
     
     <meta name="description" content="Java基础笔记（二）反射和代理在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个C">
-<meta name="keywords" content="Java反射">
+<meta name="keywords" content="Java反射,代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础笔记（二）反射和代理">
 <meta property="og:url" content="http://yoursite.com/2018/01/28/java-reflection/index.html">
@@ -96,7 +96,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">1.0.4.</span> <span class="toc-text">代理</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -155,6 +155,14 @@
 <li>方法的返回是一个<code>Object</code>对象，这里要显式转换成<code>Double</code>类型，然后再隐式转换成<code>double</code>基本类型。</li>
 </ol>
 <p>可见有了反射简直可以为所欲为，就是这么任性！</p>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p>Java在<code>java.lang.reflect</code>包中提供<code>InvocationHandler</code>接口和<code>Proxy</code>类来帮助实现动态代理。至于什么是动态代理，可以参考这篇<a href="https://www.zhihu.com/question/20794107" target="_blank" rel="noopener">知乎问答</a>。</p>
+<ul>
+<li>首先，静态代理应该是普遍了解的概念了。它是OOP的一种设计模式，依赖于接口。</li>
+<li>动态代理则是为了解决目标类方法越来越多时，代理类也要跟着膨胀的问题。因为动态代理类只要在<code>invoke()</code>方法中有选择地实现接口的方法。这对那些普遍适用的功能来说特别适合，比如缓存、认证、log等等。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object tar;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//绑定委托对象，并返回代理类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object tar)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.tar = tar;</span><br><span class="line">        <span class="comment">//绑定该类实现的所有接口，取得代理类 </span></span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(tar.getClass().getClassLoader(),</span><br><span class="line">                                      tar.getClass().getInterfaces(),</span><br><span class="line">                                      <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// invoke中的逻辑可以对接口中的所有方法生效。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy , Method method , Object[] args)</span><span class="keyword">throws</span> Throwable</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Object result = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//在调用具体函数方法前，执行功能处理</span></span><br><span class="line">        result = method.invoke(tar,args);</span><br><span class="line">        <span class="comment">//在调用具体函数方法后，执行功能处理</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，动态代理的功能十分强大，因此得到了广泛的应用。比如Spring的AOP，单元测试中的mock框架，MyBatis的sql注解等等。</p>
+<p>最后，动态代理仍是需要接口的。而借助另一个第三方类库CGLib，则可以动态生成字节码，不依赖于接口。Spring AOP对这两种技术都有使用。参见<a href="http://blog.csdn.net/heyutao007/article/details/49738887" target="_blank" rel="noopener">CSDN</a>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -168,7 +176,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Java反射/">Java反射</a>
+  <span></span> <a href="/tags/Java反射/">Java反射</a><a href="/tags/代理/">代理</a>
   </div>
 
 </div>
@@ -217,7 +225,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">1.0.4.</span> <span class="toc-text">代理</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -263,6 +271,10 @@
 				<li><a href="/tags/Java反射/" title="Java反射">Java反射<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/代理/" title="代理">代理<sup>1</sup></a></li>
+			
+		
 		</ul>
 </div>
 
@@ -278,7 +290,7 @@
   <div class="tagcloudlist">
     <p class="asidetitle">Tag Cloud</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/Java反射/" style="font-size: 10px;">Java反射</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/建站/" style="font-size: 10px;">建站</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+       <a href="/tags/Java反射/" style="font-size: 10px;">Java反射</a> <a href="/tags/lambda表达式/" style="font-size: 10px;">lambda表达式</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/建站/" style="font-size: 10px;">建站</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
     </div>
   </div>
 
