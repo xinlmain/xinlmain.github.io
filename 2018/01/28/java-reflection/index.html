@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="Java基础笔记（二）反射和代理在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个C">
+    <meta name="description" content="在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个Class对象，大概有两种方法。">
 <meta name="keywords" content="Java反射,代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础笔记（二）反射和代理">
 <meta property="og:url" content="http://yoursite.com/2018/01/28/java-reflection/index.html">
 <meta property="og:site_name" content="To conscience">
-<meta property="og:description" content="Java基础笔记（二）反射和代理在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个C">
-<meta property="og:updated_time" content="2018-01-30T14:55:13.999Z">
+<meta property="og:description" content="在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个Class对象，大概有两种方法。">
+<meta property="og:updated_time" content="2018-02-08T13:41:57.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础笔记（二）反射和代理">
-<meta name="twitter:description" content="Java基础笔记（二）反射和代理在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个C">
+<meta name="twitter:description" content="在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。 Java的反射库位于几个包下。最显著的当然是java.lang.reflect包。但我们先从Class类讲起。 Class 类Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是java.lang.Class类。 要获得一个Class对象，大概有两种方法。">
 
     
     <link rel="alternative" href="/atom.xml" title="To conscience" type="application/atom+xml">
@@ -96,11 +96,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">1.0.4.</span> <span class="toc-text">代理</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">4.</span> <span class="toc-text">代理</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Java基础笔记（二）反射和代理"><a href="#Java基础笔记（二）反射和代理" class="headerlink" title="Java基础笔记（二）反射和代理"></a>Java基础笔记（二）反射和代理</h1><p>在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。</p>
+		<p>在阅读框架源码的时候免不了要接触反射。于是干脆把这一部分基础知识整理出来吧。</p>
 <p>Java的反射库位于几个包下。最显著的当然是<code>java.lang.reflect</code>包。但我们先从<code>Class</code>类讲起。</p>
 <h3 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h3><p>Java虚拟机为程序中的所有对象都维护了它们的类型信息。而从Java API的角度，有专门的类来访问这些信息，它就是<code>java.lang.Class</code>类。</p>
 <p>要获得一个<code>Class</code>对象，大概有两种方法。</p>
@@ -199,10 +199,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2018/01/31/Java-Containers/" title="Java集合">
+ <a href="/2018/01/31/Java-Containers/" title="Java基础笔记（三）Java集合">
   <strong>上一篇：</strong><br/>
   <span>
-  Java集合</span>
+  Java基础笔记（三）Java集合</span>
 </a>
 </div>
 
@@ -233,7 +233,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（二）反射和代理"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（二）反射和代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.0.1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">1.0.2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">1.0.3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">1.0.4.</span> <span class="toc-text">代理</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-类"><span class="toc-number">1.</span> <span class="toc-text">Class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用反射分析类"><span class="toc-number">2.</span> <span class="toc-text">用反射分析类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用任意方法"><span class="toc-number">3.</span> <span class="toc-text">调用任意方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理"><span class="toc-number">4.</span> <span class="toc-text">代理</span></a></li></ol>
  
   </div>
 

@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="Java基础笔记（一）内部类和lambda表达式Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关">
+    <meta name="description" content="Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关知识总结的非常好：  闭包（计算机科学）是什么?">
 <meta name="keywords" content="lambda表达式,闭包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础笔记（一）内部类和lambda表达式">
 <meta property="og:url" content="http://yoursite.com/2018/01/24/java-lambda-and-closure/index.html">
 <meta property="og:site_name" content="To conscience">
-<meta property="og:description" content="Java基础笔记（一）内部类和lambda表达式Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关">
-<meta property="og:updated_time" content="2018-01-30T14:55:21.732Z">
+<meta property="og:description" content="Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关知识总结的非常好：  闭包（计算机科学）是什么?">
+<meta property="og:updated_time" content="2018-02-08T13:42:12.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础笔记（一）内部类和lambda表达式">
-<meta name="twitter:description" content="Java基础笔记（一）内部类和lambda表达式Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关">
+<meta name="twitter:description" content="Java对函数式编程的支持这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。 闭包函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。 以下三篇知乎的回答对闭包的相关知识总结的非常好：  闭包（计算机科学）是什么?">
 
     
     <link rel="alternative" href="/atom.xml" title="To conscience" type="application/atom+xml">
@@ -96,11 +96,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）内部类和lambda表达式"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）内部类和lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.1.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部内部类"><span class="toc-number">1.0.3.</span> <span class="toc-text">局部内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名内部类"><span class="toc-number">1.0.4.</span> <span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.5.</span> <span class="toc-text">lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式的闭包实现"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">lambda表达式的闭包实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.1.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部内部类"><span class="toc-number">3.</span> <span class="toc-text">局部内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名内部类"><span class="toc-number">4.</span> <span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式"><span class="toc-number">5.</span> <span class="toc-text">lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式的闭包实现"><span class="toc-number">5.1.</span> <span class="toc-text">lambda表达式的闭包实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Java基础笔记（一）内部类和lambda表达式"><a href="#Java基础笔记（一）内部类和lambda表达式" class="headerlink" title="Java基础笔记（一）内部类和lambda表达式"></a>Java基础笔记（一）内部类和lambda表达式</h1><h3 id="Java对函数式编程的支持"><a href="#Java对函数式编程的支持" class="headerlink" title="Java对函数式编程的支持"></a>Java对函数式编程的支持</h3><p>这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。</p>
+		<h3 id="Java对函数式编程的支持"><a href="#Java对函数式编程的支持" class="headerlink" title="Java对函数式编程的支持"></a>Java对函数式编程的支持</h3><p>这里不讨论函数式编程的历史和好坏，只是要介绍Java的接口、内部类以及lambda表达式。接口不必多说，主要讲一下内部类和lambda表达式。</p>
 <h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>函数式编程、闭包、匿名函数、lambda表达式，几乎所有的高级语言都有不同程度的支持。为了避免概念过多造成的混淆，还是有必要搞清楚闭包等重要概念。</p>
 <p>以下三篇知乎的回答对闭包的相关知识总结的非常好：</p>
 <ul>
@@ -284,7 +284,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础笔记（一）内部类和lambda表达式"><span class="toc-number">1.</span> <span class="toc-text">Java基础笔记（一）内部类和lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.0.1.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">1.0.2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部内部类"><span class="toc-number">1.0.3.</span> <span class="toc-text">局部内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名内部类"><span class="toc-number">1.0.4.</span> <span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式"><span class="toc-number">1.0.5.</span> <span class="toc-text">lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式的闭包实现"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">lambda表达式的闭包实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java对函数式编程的支持"><span class="toc-number">1.</span> <span class="toc-text">Java对函数式编程的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包"><span class="toc-number">1.1.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">2.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部内部类"><span class="toc-number">3.</span> <span class="toc-text">局部内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名内部类"><span class="toc-number">4.</span> <span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式"><span class="toc-number">5.</span> <span class="toc-text">lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式的闭包实现"><span class="toc-number">5.1.</span> <span class="toc-text">lambda表达式的闭包实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
  
   </div>
 
