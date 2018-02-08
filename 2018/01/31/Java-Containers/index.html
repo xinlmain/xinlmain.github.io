@@ -4,20 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Java Containers | To conscience</title>
+    <title>Java集合 | To conscience</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="toconscience">
     
 
     
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Java Containers">
+    <meta name="description" content="总结自己总结了半天，发现还是这篇文章总结得好，干脆就看它吧…（捂脸表情）  下面做一些补充。 数组Java的数组不属于集合类，更像是C++中的数组，是语言的基础功能。因此，并没有一个Array类对应数组。不同于C#，C#中[]和Array类是等价的。所以，最好把Java的数组看成跟C++的数组一样。 数组有个length属性，但只表示数组的容量大小，从创建时就确定了。 数组的运行时类型还跟其内容有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合">
 <meta property="og:url" content="http://yoursite.com/2018/01/31/Java-Containers/index.html">
 <meta property="og:site_name" content="To conscience">
+<meta property="og:description" content="总结自己总结了半天，发现还是这篇文章总结得好，干脆就看它吧…（捂脸表情）  下面做一些补充。 数组Java的数组不属于集合类，更像是C++中的数组，是语言的基础功能。因此，并没有一个Array类对应数组。不同于C#，C#中[]和Array类是等价的。所以，最好把Java的数组看成跟C++的数组一样。 数组有个length属性，但只表示数组的容量大小，从创建时就确定了。 数组的运行时类型还跟其内容有">
+<meta property="og:image" content="http://p30l6xq7g.bkt.clouddn.com/18-2-2/89980373.jpg">
 <meta property="og:updated_time" content="2018-01-31T00:38:00.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Containers">
+<meta name="twitter:title" content="Java集合">
+<meta name="twitter:description" content="总结自己总结了半天，发现还是这篇文章总结得好，干脆就看它吧…（捂脸表情）  下面做一些补充。 数组Java的数组不属于集合类，更像是C++中的数组，是语言的基础功能。因此，并没有一个Array类对应数组。不同于C#，C#中[]和Array类是等价的。所以，最好把Java的数组看成跟C++的数组一样。 数组有个length属性，但只表示数组的容量大小，从创建时就确定了。 数组的运行时类型还跟其内容有">
+<meta name="twitter:image" content="http://p30l6xq7g.bkt.clouddn.com/18-2-2/89980373.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="To conscience" type="application/atom+xml">
@@ -76,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/01/31/Java-Containers/" title="Java Containers" itemprop="url">Java Containers</a>
+      <a href="/2018/01/31/Java-Containers/" title="Java集合" itemprop="url">Java集合</a>
   </h1>
   <p class="article-author">By
        
@@ -92,14 +97,60 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三种重要的接口"><span class="toc-number">3.</span> <span class="toc-text">三种重要的接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">4.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector与ArrayList"><span class="toc-number">5.</span> <span class="toc-text">Vector与ArrayList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希表和哈希集"><span class="toc-number">6.</span> <span class="toc-text">哈希表和哈希集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树表和树集"><span class="toc-number">7.</span> <span class="toc-text">树表和树集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map的遍历（视图）"><span class="toc-number">8.</span> <span class="toc-text">Map的遍历（视图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays和Collections工具类"><span class="toc-number">9.</span> <span class="toc-text">Arrays和Collections工具类</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>自己总结了半天，发现还是<a href="https://www.cnblogs.com/leeplogs/p/5891861.html" target="_blank" rel="noopener">这篇文章</a>总结得好，干脆就看它吧…（捂脸表情）</p>
+<p><img src="http://p30l6xq7g.bkt.clouddn.com/18-2-2/89980373.jpg" alt="Java collections"></p>
+<p>下面做一些补充。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>Java的数组不属于集合类，更像是C++中的数组，是语言的基础功能。因此，并没有一个<code>Array</code>类对应数组。不同于C#，C#中<code>[]</code>和<code>Array</code>类是等价的。所以，最好把Java的数组看成跟C++的数组一样。</p>
+<p>数组有个<code>length</code>属性，但只表示数组的容量大小，从创建时就确定了。</p>
+<p>数组的运行时类型还跟其内容有关，例如下面代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">System.out.println(array.getClass().getName()); <span class="comment">// 输出 [I</span></span><br><span class="line">System.out.println((<span class="keyword">new</span> <span class="keyword">double</span>[<span class="number">10</span>]).getClass().getName()); <span class="comment">// 输出 [D</span></span><br></pre></td></tr></table></figure>
+<p>可见数组不仅可以存放<code>Object</code>，还可以存放基本类型（非对象），而集合类就只能存放对象。数组中存放不同的类型时，Java会为<code>getClass()</code>提供不同的名字。</p>
+<p>此外，与数组有关的几个帮助类有：</p>
+<ul>
+<li><code>java.lang.reflect.Array</code>，提供了动态创建和访问java数组的静态方法。</li>
+<li><code>java.util.Arrays</code>，提供了操作数组的常用静态方法，例如排序、查找等等。</li>
+</ul>
+<h3 id="三种重要的接口"><a href="#三种重要的接口" class="headerlink" title="三种重要的接口"></a>三种重要的接口</h3><ol>
+<li><code>List</code>（有序、可重复）List里存放的对象是有序的，同时也是可以重复的，List关注的是索引，拥有一系列和索引相关的方法，查询速度快。因为往list集合里插入或删除数据时，会伴随着后面数据的移动，所有插入删除数据速度慢。</li>
+</ol>
+<ol>
+<li><code>Set</code>（无序、不能重复）Set里存放的对象是无序，不能重复的，集合中的对象不按特定的方式排序，只是简单地把对象加入集合中。</li>
+</ol>
+<ol>
+<li><code>Map</code>（键值对、键唯一、值不唯一）Map集合中存储的是键值对，键不能重复，值可以重复。根据键得到值，对map集合遍历时先得到键的set集合，对set集合进行遍历，得到相应的值。</li>
+</ol>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p><code>List</code>可以用数组或链表实现。链表对应的类是<code>LinkedList</code>。Java中的链表是双向链表。</p>
+<h3 id="Vector与ArrayList"><a href="#Vector与ArrayList" class="headerlink" title="Vector与ArrayList"></a>Vector与ArrayList</h3><p><code>Vector</code>是<code>ArrayList</code>的早期版本，并且是同步的。在不需要同步时可以使用<code>ArrayList</code>。</p>
+<h3 id="哈希表和哈希集"><a href="#哈希表和哈希集" class="headerlink" title="哈希表和哈希集"></a>哈希表和哈希集</h3><p><code>HashTable</code>是早期版本，并且也是同步的，已被<code>HashMap</code>取代。</p>
+<p>Java的哈希表使用拉链法解决哈希冲突，在Java 8中改进了拉链法：当一个桶（哈希值相同）对应的元素的数量过多时，采用平衡树而非链表来改善查找效率。这样在高哈希冲突情况下，可以将最坏时间复杂度由O(n)降为O(logn)。参见<a href="http://blog.csdn.net/haiyoung/article/details/52759823" target="_blank" rel="noopener">这篇文章</a>。</p>
+<p>当需要同步时，使用同步版本<code>ConcurrentHashMap</code>。</p>
+<p>使用哈希表的算法，而不关心桶中存储的值，就是<code>HashSet</code>。<code>HashSet</code>用来存放不重复的元素集合。实际上<code>HashSet</code>的实现就是直接使用<code>HashMap</code>，所有的桶中存储的值是同一个对象的引用。</p>
+<p>关于它们的具体实现，参见下面两篇好文：</p>
+<p><a href="http://zhangshixi.iteye.com/blog/672697" target="_blank" rel="noopener">HashMap</a><br><a href="http://zhangshixi.iteye.com/blog/673143" target="_blank" rel="noopener">HashSet</a></p>
+<p>还有一种哈希表叫<code>LinkedHashMap</code>，就是把元素按插入顺序用双向指针连起来，这样遍历时可以保持插入顺序。</p>
+<h3 id="树表和树集"><a href="#树表和树集" class="headerlink" title="树表和树集"></a>树表和树集</h3><p>哈希表的插入和查找复杂度是O(1)稍大一点（因为哈希冲突），但是它的元素不是有序的。还有一种使用二叉排序树实现的Map，就是<code>TreeMap</code>。Java用红黑树实现，可以实现O(logn)速度的插入和查找。虽然没有哈希快，但已经很快了，关键是能排序啊！遍历<code>TreeMap</code>可以得到排过序的序列。</p>
+<p>同样，<code>TreeSet</code>就是用<code>TreeMap</code>实现的排序集。</p>
+<h3 id="Map的遍历（视图）"><a href="#Map的遍历（视图）" class="headerlink" title="Map的遍历（视图）"></a>Map的遍历（视图）</h3><p>视图是数据库的概念。在这里的意思就是对象的某种转化。<code>Map</code>本身并不是<code>Collection</code>，但它可以转化成<code>Collection</code>。可以分别遍历它的：</p>
+<ul>
+<li><code>Set&lt;K&gt; KeySet()</code> 键的集合。</li>
+<li><code>Collection&lt;V&gt; values()</code> 值的集合。</li>
+<li><code>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code> 键值对的集合。</li>
+</ul>
+<h3 id="Arrays和Collections工具类"><a href="#Arrays和Collections工具类" class="headerlink" title="Arrays和Collections工具类"></a>Arrays和Collections工具类</h3><p><code>java.utils.Arrays</code>提供了操作数组的常用静态方法，如查找、排序等。<code>Arrays</code>还提供一个<code>asList()</code>方法，可以返回数组的<code>List</code>视图。可以访问和修改元素，但不可以使用会导致数组大小改变的方法，否则会产生异常。</p>
+<p>同理，<code>java.utils.Collections</code>提供了一些操作集合的实用方法。例如简单算法等等。Java并没有c#中的LINQ，它提供了一些简单的批处理方法。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+</div>
 
 
 </div>
@@ -108,7 +159,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2018/01/31/Java-Containers/" data-title="Java Containers | To conscience" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/01/31/Java-Containers/" data-title="Java集合 | To conscience" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -148,7 +199,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三种重要的接口"><span class="toc-number">3.</span> <span class="toc-text">三种重要的接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">4.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector与ArrayList"><span class="toc-number">5.</span> <span class="toc-text">Vector与ArrayList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哈希表和哈希集"><span class="toc-number">6.</span> <span class="toc-text">哈希表和哈希集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树表和树集"><span class="toc-number">7.</span> <span class="toc-text">树表和树集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map的遍历（视图）"><span class="toc-number">8.</span> <span class="toc-text">Map的遍历（视图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays和Collections工具类"><span class="toc-number">9.</span> <span class="toc-text">Arrays和Collections工具类</span></a></li></ol>
  
   </div>
 
@@ -162,7 +213,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Java基础/" title="Java基础">Java基础<sup>2</sup></a></li>
+			<li><a href="/categories/Java基础/" title="Java基础">Java基础<sup>3</sup></a></li>
 		  
 		
 		  
